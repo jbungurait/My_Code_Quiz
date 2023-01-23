@@ -7,7 +7,7 @@
 body {
     display: block;
     flex-wrap: nowrap;
-    margin: 20px, 20px, 20px, 20px;
+    margin: 20px, 20px;
     text-align: center;
     align-items: center;
 }
@@ -24,6 +24,13 @@ body {
 
 #quizTimer {
     background-color: rgba(0, 0, 255, 0.515);
-
+    margin-left: 100px;
+    margin-right: 100px;
 }
 
+#Questions {
+    display: block;
+    min-height: 200px;
+    max-height: fit-content;
+
+}

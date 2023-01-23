@@ -3,6 +3,8 @@ var title = document.getElementById('quizTitle');
 var countdownTimer = document.getElementById('quizTimer');
 var startButton = document.getElementById('start');
 var scoreKeeper = document.getElementsByClassName('HighScores');
+var questions = document.getElementById('Questions');
+
 
 countdownTimer.textContent = "Click Start to begin.";
 
