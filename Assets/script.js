@@ -2,6 +2,10 @@ var quizInterface = document.getElementsByClassName('interface');
 var title = document.getElementById('quizTitle');
 var countdownTimer = document.getElementById('quizTimer');
 var startButton = document.getElementById('start');
+var scoreKeeper = document.getElementsByClassName('HighScores');
+
+countdownTimer.textContent = "Click Start to begin.";
+
 
 function countdown() {
     var timeLeft = 10; 
@@ -11,7 +15,7 @@ function countdown() {
             countdownTimer.textContent = timeLeft + ' seconds remaining';
             timeLeft--;
         } else if (timeLeft === 1) {
-            countdownTimer.textContent = timeLeft + 'second remaing';
+            countdownTimer.textContent = timeLeft + ' second remaing';
             timeLeft--;
         } else {
             countdownTimer.textContent = 'Out of time!';
@@ -22,6 +26,6 @@ function countdown() {
 
 startButton.addEventListener("click", function() {
     countdown();
-    
+
 
 })

@@ -3,3 +3,27 @@
     margin: 0px;
     border: 0px;
 }
+
+body {
+    display: block;
+    flex-wrap: nowrap;
+    margin: 20px, 20px, 20px, 20px;
+    text-align: center;
+    align-items: center;
+}
+
+.interface {
+    padding: 55px;
+    margin: 20px;
+    background-color: rgba(255, 127, 80, 0.836);
+}
+
+#quizTitle {
+    font-size: 100px;
+}
+
+#quizTimer {
+    background-color: rgba(0, 0, 255, 0.515);
+
+}
+
