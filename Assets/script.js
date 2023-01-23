@@ -4,7 +4,7 @@ var countdownTimer = document.getElementById('quizTimer');
 var startButton = document.getElementById('start');
 var scoreKeeper = document.getElementsByClassName('HighScores');
 var questions = document.getElementById('Questions');
-
+var dispQuestion = document.getElementById('dispQuestions');
 
 countdownTimer.textContent = "Click Start to begin.";
 
