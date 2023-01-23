@@ -34,3 +34,7 @@ body {
     max-height: fit-content;
 
 }
+
+#choice {
+    background-color: rgba(73, 11, 245, 0.667);
+}

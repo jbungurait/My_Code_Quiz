@@ -8,6 +8,10 @@ var dispQuestion = document.getElementById('dispQuestions');
 
 countdownTimer.textContent = "Click Start to begin.";
 
+// create questions variables
+
+// create answers array
+
 
 function countdown() {
     var timeLeft = 10; 
@@ -25,6 +29,10 @@ function countdown() {
         }
     }, 1000);
 } 
+
+function populateQuestions() {
+    dispQuestion.textContent = 
+}
 
 startButton.addEventListener("click", function() {
     countdown();
