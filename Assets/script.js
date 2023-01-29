@@ -5,7 +5,11 @@ var startButton = document.getElementById('start');
 var scoreKeeper = document.getElementsByClassName('HighScores');
 var questions = document.getElementById('Questions');
 var dispQuestion = document.getElementById('dispQuestion');
-var choices = document.getElementsByClassName('choice');
+var choices = document.createElement('div');
+
+
+
+
 
 countdownTimer.textContent = "Click Start to begin.";
 var penalty = 10;
@@ -59,28 +63,44 @@ function countdown() {
     }, 1000);
 } 
 
-console.log(quizQuestions);
-
 function populateQuestions() {
     for (var i = 0; i < quizQuestions.length; i++)
     {
      var ask = quizQuestions[questionIndex].question; 
      dispQuestion.textContent = ask;
 
-   
-
      questionIndex = questionIndex++;
-
-  
-    
-    
 
     }
 }
 
+function createAnswers() {
+
+    var answerA = document.createElement("button");
+    var answerB = document.createElement("button");
+    var answerC = document.createElement("button");
+    var answerD = document.createElement("button");
+    
+    dispQuestion.appendChild(choices);
+    choices.appendChild(answerA);
+    choices.appendChild(answerB);
+    choices.appendChild(answerC);
+    choices.appendChild(answerD);
+    
+    answerA.textContent = quizQuestions[questionIndex].choice[0];
+    answerB.textContent = quizQuestions[questionIndex].choice[1];
+    answerC.textContent = quizQuestions[questionIndex].choice[2];
+    answerD.textContent = quizQuestions[questionIndex].choice[3];
+    
+}
+
+
+
+
 startButton.addEventListener("click", function() {
     countdown();
     populateQuestions();
+    createAnswers();
 
 
 })
