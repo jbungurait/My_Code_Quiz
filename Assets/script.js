@@ -4,11 +4,13 @@ var countdownTimer = document.getElementById('quizTimer');
 var startButton = document.getElementById('start');
 var scoreKeeper = document.getElementsByClassName('HighScores');
 var questions = document.getElementById('Questions');
-var dispQuestion = document.getElementById('dispQuestions');
+var dispQuestion = document.getElementById('dispQuestion');
 var choices = document.getElementsByClassName('choice');
 
 countdownTimer.textContent = "Click Start to begin.";
 var penalty = 10;
+var questionIndex = 0;
+
 
 // create questions variables
 var quizQuestions = [
@@ -62,8 +64,14 @@ console.log(quizQuestions);
 function populateQuestions() {
     for (var i = 0; i < quizQuestions.length; i++)
     {
-     dispQuestion.textContent = quizQuestions[i].question;
-    document.choices.createElement("button");
+     var ask = quizQuestions[questionIndex].question; 
+     dispQuestion.textContent = ask;
+
+   
+
+     questionIndex = questionIndex++;
+
+  
     
     
 
