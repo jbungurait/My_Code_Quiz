@@ -5,6 +5,7 @@ var startButton = document.getElementById('start');
 var scoreKeeper = document.getElementsByClassName('HighScores');
 var questions = document.getElementById('Questions');
 var dispQuestion = document.getElementById('dispQuestions');
+var choices = document.getElementsByClassName('choice');
 
 countdownTimer.textContent = "Click Start to begin.";
 var penalty = 10;
@@ -56,15 +57,22 @@ function countdown() {
     }, 1000);
 } 
 
+console.log(quizQuestions);
+
 function populateQuestions() {
     for (var i = 0; i < quizQuestions.length; i++)
     {
-     dispQuestion.textContent = quizQuestions[quizQuestions].question;
+     dispQuestion.textContent = quizQuestions[i].question;
+    document.choices.createElement("button");
+    
+    
+
     }
 }
 
 startButton.addEventListener("click", function() {
     countdown();
+    populateQuestions();
 
 
 })
