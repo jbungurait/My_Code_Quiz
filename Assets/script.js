@@ -45,15 +45,15 @@ var quizQuestions = [
 
 var timeLeft = 100; 
 
-function countdown(timeLeft) {
+function countdown(time) {
 
     var timeInterval = setInterval(function() {
-        if (timeLeft >1) {
-            countdownTimer.textContent = timeLeft + ' seconds remaining';
-            timeLeft--;
+        if (time >1) {
+            countdownTimer.textContent = time + ' seconds remaining';
+            time--;
         } else if (timeLeft === 1) {
-            countdownTimer.textContent = timeLeft + ' second remaing';
-            timeLeft--;
+            countdownTimer.textContent = time + ' second remaing';
+            time--;
         } else {
             countdownTimer.textContent = 'Out of time!';
             clearInterval(timeInterval);
@@ -62,20 +62,21 @@ function countdown(timeLeft) {
 } 
 
 function populateQuestions() {
-    for (var i = 0; i < quizQuestions.length; i++)
-    {
+
      var ask = quizQuestions[questionIndex].question; 
      dispQuestion.textContent = ask;
-     questionIndex = questionIndex++;
-    }
-    for (var i = 0; i < 4; i++)  {
+     for (var i = 0; i < 4; i++)  {
         var answer = document.createElement("button");
         dispQuestion.appendChild(choices);
         choices.appendChild(answer);
         answer.textContent = quizQuestions[questionIndex].choice[i];
         answer.addEventListener("click", function() {
             checkAnswer(this.textContent);
+            countdown(timeLeft);
         })
+
+
+    
 }
 }
 
@@ -84,7 +85,7 @@ function checkAnswer(selection) {
     console.log(quizQuestions[questionIndex].answer);
     if (selection === quizQuestions[questionIndex].answer) {
         countdownTimer.textContent = "Correct!";
-        questionIndex++;
+        return questionIndex++;
     } else {
         countdownTimer.textContent = "Incorrect.";
         timeLeft = timeLeft - penalty;
@@ -94,7 +95,10 @@ function checkAnswer(selection) {
 
 
 startButton.addEventListener("click", function() {
+    if (timeLeft = 100) {
     countdown(timeLeft);
+    };
+    
     populateQuestions();
 
 });
