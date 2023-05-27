@@ -8,9 +8,6 @@ var dispQuestion = document.getElementById('dispQuestion');
 var choices = document.createElement('div');
 
 
-
-
-
 countdownTimer.textContent = "Click Start to begin.";
 var penalty = 10;
 var questionIndex = 0;
@@ -41,13 +38,14 @@ var quizQuestions = [
     {
         question: "Which of the following are not array methods?",
         choice: [".push()", ".slice()", ".add()", ".replace()",],
-        answer: ".add()",
+        answer: ".replace()",
     },
 
 ]
 
-function countdown() {
-    var timeLeft = 100; 
+var timeLeft = 100; 
+
+function countdown(timeLeft) {
 
     var timeInterval = setInterval(function() {
         if (timeLeft >1) {
@@ -68,39 +66,35 @@ function populateQuestions() {
     {
      var ask = quizQuestions[questionIndex].question; 
      dispQuestion.textContent = ask;
-
      questionIndex = questionIndex++;
+    }
+    for (var i = 0; i < 4; i++)  {
+        var answer = document.createElement("button");
+        dispQuestion.appendChild(choices);
+        choices.appendChild(answer);
+        answer.textContent = quizQuestions[questionIndex].choice[i];
+        answer.addEventListener("click", function() {
+            checkAnswer(this.textContent);
+        })
+}
+}
 
+function checkAnswer(selection) {
+    console.log(selection);
+    console.log(quizQuestions[questionIndex].answer);
+    if (selection === quizQuestions[questionIndex].answer) {
+        countdownTimer.textContent = "Correct!";
+        questionIndex++;
+    } else {
+        countdownTimer.textContent = "Incorrect.";
+        timeLeft = timeLeft - penalty;
+        return timeLeft;
     }
 }
 
-function createAnswers() {
-
-    var answerA = document.createElement("button");
-    var answerB = document.createElement("button");
-    var answerC = document.createElement("button");
-    var answerD = document.createElement("button");
-    
-    dispQuestion.appendChild(choices);
-    choices.appendChild(answerA);
-    choices.appendChild(answerB);
-    choices.appendChild(answerC);
-    choices.appendChild(answerD);
-    
-    answerA.textContent = quizQuestions[questionIndex].choice[0];
-    answerB.textContent = quizQuestions[questionIndex].choice[1];
-    answerC.textContent = quizQuestions[questionIndex].choice[2];
-    answerD.textContent = quizQuestions[questionIndex].choice[3];
-    
-}
-
-
-
 
 startButton.addEventListener("click", function() {
-    countdown();
+    countdown(timeLeft);
     populateQuestions();
-    createAnswers();
 
-
-})
+});

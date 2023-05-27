@@ -35,6 +35,10 @@ body {
 
 }
 
+button {
+    padding: 10px;
+}
+
 #choice {
     background-color: rgba(73, 11, 245, 0.667);
 }
