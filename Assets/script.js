@@ -1,16 +1,14 @@
 var quizInterface = document.getElementsByClassName('interface');
 var title = document.getElementById('quizTitle');
 var countdownTimer = document.getElementById('quizTimer');
-var startButton = document.getElementById('start');
-var scoreKeeper = document.getElementsByClassName('HighScores');
-var questions = document.getElementById('Questions');
-var dispQuestion = document.getElementById('dispQuestion');
-var choices = document.createElement('div');
+var startButton = document.getElementById("start");
+var scoreKeeper = $(".HighScores");
 
 
 countdownTimer.textContent = "Click Start to begin.";
 var penalty = 10;
 var questionIndex = 0;
+var score = 0;
 
 
 // create questions variables
@@ -22,7 +20,7 @@ var quizQuestions = [
     },
     {
         question: "What is the correct syntax for declairing a function?",
-        choice: ["function []", "function = ()", "funtion{}", "function()",],
+        choice: ["function []", "function => ()", "funtion{}", "function()",],
         answer: "function()",
     },
     {
@@ -61,44 +59,149 @@ function countdown(time) {
     }, 1000);
 } 
 
-function populateQuestions() {
 
-     var ask = quizQuestions[questionIndex].question; 
-     dispQuestion.textContent = ask;
-     for (var i = 0; i < 4; i++)  {
-        var answer = document.createElement("button");
-        dispQuestion.appendChild(choices);
-        choices.appendChild(answer);
-        answer.textContent = quizQuestions[questionIndex].choice[i];
-        answer.addEventListener("click", function() {
-            checkAnswer(this.textContent);
-            countdown(timeLeft);
-        })
+var createCard = function (quizQuestions, questionIndex) {  
+    if (timeLeft === 100) {
+    countdown(timeLeft);
+    };
 
+    $(".welcome").remove();
+    var question = quizQuestions[questionIndex].question; 
+    var choiceA = quizQuestions[questionIndex].choice[0];
+    var choiceB = quizQuestions[questionIndex].choice[1];
+    var choiceC = quizQuestions[questionIndex].choice[2];
+    var choiceD = quizQuestions[questionIndex].choice[3];
+
+    const questionCard = `
+        <div class="question"> 
+            <div class="card">
+                <h2>${question}</h2>
+                <button id="a">${choiceA}</button>
+                <button id="b">${choiceB}</button>
+                <button id="c">${choiceC}</button>
+                <button id="d">${choiceD}</button>
+             </div>
+        </div>
+    `;
+
+    $("#dispQuestion").append(questionCard);
+
+    const btnA = document.getElementById("a");
+    const btnB = document.getElementById("b");
+    const btnC = document.getElementById("c");
+    const btnD = document.getElementById("d");
+
+    btnA.addEventListener('click', function() {
+        const value = this.textContent;
+        checkAnswer(value, questionIndex, timeLeft);
+    });
+    btnB.addEventListener('click', function() {
+        const value = this.textContent;
+        checkAnswer(value, questionIndex, timeLeft);
+    });
+    btnC.addEventListener('click', function() {
+        const value = this.textContent;
+        checkAnswer(value, questionIndex, timeLeft);
+    });
+    btnD.addEventListener('click', function() {
+        const value = this.textContent;
+        checkAnswer(value, questionIndex, timeLeft);
+    });
+}
+
+function checkAnswer(value, Index, timeLeft) {
+    const correct = `<h3 id="alert">Correct</h3>`;
+    const incorrect = `<h3 id="alert">Incorrect</h3>`;
+    // console.log(value);
+    // console.log(quizQuestions[questionIndex].answer);
+    if (value === quizQuestions[Index].answer) {
+        $('h3').remove();
+        $('#score').remove();
+        $('.head').append(correct);
+        Index++;
+        score = score + 10;
+         const scoreCard = `
+        <h3 id='score'>Score: ${score}</h3>
+        `;
+        $('.head').append(scoreCard);
+        console.log(Index);
+        $('.question').remove();
+        if (Index < quizQuestions.length) {
+        createCard(quizQuestions, Index);
+        } else {
+              ScoreCard(score);
+        }
+    } else {
+        $('h3').remove();
+        $('.head').append(incorrect);
+        const scoreCard = `
+        <h3 id='score'>Score: ${score}</h3>
+        `;
+        $('.head').append(scoreCard);
+        timeLeft = timeLeft - penalty;
+        console.log(Index);
+        countdown(timeLeft);
+        
+    };
+
+
+    }
+
+var ScoreCard = function(score) {
+const final = `
+            <div class='final'>
+            <h1>Quiz Complete</h1>
+            <h2>Your final Score is: ${score}</h2>
+            <form id='finalScore'>
+                <span>Enter your initals.</span>
+                <input id='initials' type='text'>
+
+                </input>
+                <button id='submit'>Submit</button>
+            </form>
+            </div>
+        `
+
+        $('.question').remove();
+        $('h3').remove();
+        $('#score').remove();
+        $('#dispQuestion').append(final);
+        highScoreCard(score);
+    }
+    
+    var highScoreCard = function(score) {
+        document.getElementById('submit').addEventListener('click', function() {
+            const userInitials = $('#initials').val();
+            var highScores = JSON.parse(localStorage.getItem("highScores")) || [];
+            highScores.push({score: score, userInitials: userInitials});
+            localStorage.setItem("highScores", JSON.stringify(highScores));
+        });
+        
+        var UserScores = JSON.parse(localStorage.getItem("highScores")) || [];
+        UserScores.forEach(UserScores => {
+            
+            var scorePage = `
+            <div>
+            <p>${UserScores.userInitials}: ${UserScores.score}</p>
+            </div>
+            `;
+            
+            $('#dispQuestion').append(scorePage);
+       
+        })};
 
     
-}
-}
 
-function checkAnswer(selection) {
-    console.log(selection);
-    console.log(quizQuestions[questionIndex].answer);
-    if (selection === quizQuestions[questionIndex].answer) {
-        countdownTimer.textContent = "Correct!";
-        return questionIndex++;
-    } else {
-        countdownTimer.textContent = "Incorrect.";
-        timeLeft = timeLeft - penalty;
-        return timeLeft;
-    }
-}
 
 
 startButton.addEventListener("click", function() {
-    if (timeLeft = 100) {
-    countdown(timeLeft);
-    };
+    startButton.remove();
     
-    populateQuestions();
+    createCard(quizQuestions, questionIndex);
+
+      const scoreCard = `
+        <h3 id='score'>Score: ${score}</h3>
+    `;
+    $('.head').append(scoreCard);
 
 });
