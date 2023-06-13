@@ -21,3 +21,45 @@ When the game is over
 Then I can save my initials and my score
 
 
+## Table of Contents
+
+  - [Installation](#installation)
+
+  - [Usage](#usage)
+
+  - [Credits](#credits)
+
+  - [License](#license)
+
+  - [Features](#features)
+
+  - [Contribution](#contribution)
+
+
+  ## Installation
+
+  This app is deployed to a website.
+
+  ## Usage
+
+  This website is a code quiz for testing your knowledge!
+
+  ## Credits
+ [Jquery](https://jquery.com/)
+ [Bootstrap](https://getbootstrap.com/)
+
+  ### [Github](https://github.com/jbungurait)
+  ### [Email](mailto:jbungurait@gmail.com;)
+  ### [LinkedIn](https://www.linkedin.com/in/josh-ungurait-0045b352/)
+
+  ## License
+
+  This project licensed under MIT License [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT).
+
+  ## Features
+
+  This webpage is a coding quiz to test your knowledge!
+
+  ## Contribution
+
+  Email me!
