@@ -9,7 +9,7 @@ countdownTimer.textContent = "Click Start to begin.";
 var penalty = 10;
 var questionIndex = 0;
 var score = 0;
-var timeLeft = 100; 
+var timeLeft = 50; 
 
 
 // create questions variables
@@ -45,15 +45,13 @@ var quizQuestions = [
 
 function countdown() {
     var timeInterval = setInterval(function() {
-        if (timeLeft >1) {
+        if (timeLeft >= 1) {
             countdownTimer.textContent = timeLeft + ' seconds remaining';
-            timeLeft--;
-        } else if (remainingTime === 1) {
-            countdownTimer.textContent = timeLeft + ' second remaing';
             timeLeft--;
         } else {
             countdownTimer.textContent = 'Out of time!';
             clearInterval(timeInterval);
+            ScoreCard(score);
         }
     }, 1000);
 
@@ -140,9 +138,9 @@ function checkAnswer(value, Index) {
         timeLeft = timeLeft - penalty;
         $('.question').remove();
         if (Index < quizQuestions.length) {
-            countdownTimer.textContent = '';
             createCard(quizQuestions, Index);
         } else {
+            countdownTimer.remove();
             ScoreCard(score);
         }
     };
